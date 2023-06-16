@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mostrar Campos</title>
+</head>
+<body>
+    <h1>Mostrar Campos</h1>
+    <input type="text" id="idInput" placeholder="Ingrese un ID">
+    <button onclick="mostrarCampos()">Mostrar</button>
+    <div id="camposContainer"></div>
+
+    <script>
+        // Precargar datos del archivo CSV en un array
+        function cargarDatosCSV(callback) {
+            fetch('datos.csv')
+                .then(response => response.text())
+                .then(data => {
+                    // Convertir datos CSV en un array de filas
+                    var filas = data.split('\n');
+                    // Eliminar encabezado
+                    var encabezado = filas.shift().split(',');
+                    var datos = [];
+
+                    filas.forEach(function (fila) {
+                        var valores = fila.split(',');
+                        var filaObj = {};
+
+                        encabezado.forEach(function (encabezado, index) {
+                            filaObj[encabezado] = valores[index];
+                        });
+
+                        datos.push(filaObj);
+                    });
+
+                    callback(datos);
+                })
+                .catch(error => {
+                    console.log('Error al cargar el archivo CSV');
+                });
+        }
+
+        function mostrarCampos() {
+            var id = document.getElementById('idInput').value;
+
+            cargarDatosCSV(function (datos) {
+                var encontrado = false;
+
+                for (var i = 0; i < datos.length; i++) {
+                    if (datos[i].id === id) {
+                        encontrado = true;
+                        var nombre = datos[i].nombre;
+                        var curso = datos[i].curso;
+                        var grupo = datos[i].grupo;
+                        var numero_de_serie = datos[i].numero_de_serie;
+
+                        var camposHtml = `
+                            <p>Nombre: ${nombre}</p>
+                            <p>Curso: ${curso}</p>
+                            <p>Grupo: ${grupo}</p>
+                            <p>Número de serie: ${numero_de_serie}</p>
+                        `;
+                        document.getElementById('camposContainer').innerHTML = camposHtml;
+                        break;
+                    }
+                }
+
+                if (!encontrado) {
+                    document.getElementById('camposContainer').innerHTML = 'No se encontró el ID especificado';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
