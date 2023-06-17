@@ -48,15 +48,13 @@
                 for (var i = 0; i < datos.length; i++) {
                     if (datos[i].id === id) {
                         encontrado = true;
-                        var nombre = datos[i].nombre;
+                        var nombre = datos[i].nome;
                         var curso = datos[i].curso;
-                        var grupo = datos[i].grupo;
                         var numero_de_serie = datos[i].numero_de_serie;
 
                         var camposHtml = `
-                            <p>Nombre: ${nombre}</p>
+                            <p>Nome: ${nombre}</p>
                             <p>Curso: ${curso}</p>
-                            <p>Grupo: ${grupo}</p>
                             <p>Número de serie: ${numero_de_serie}</p>
                         `;
                         document.getElementById('camposContainer').innerHTML = camposHtml;
