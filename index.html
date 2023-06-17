@@ -6,7 +6,7 @@
 <body>
     <h1>Mostrar Campos</h1>
     <input type="text" id="idInput" placeholder="Ingrese un ID">
-    <button onclick="mostrarCampos()">Mostrar</button>
+    <button onclick="botonPulsado()">Mostrar</button>
     <div id="camposContainer"></div>
 
     <script>
@@ -38,12 +38,13 @@
                     console.log('Error al cargar el archivo CSV');
                 });
         }
+        function botonPulsado(){
+            var id = document.getElementById('idInput').value;
+            mostrarCampos(id);
 
-        function mostrarCampos() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var idParam = urlParams.get('id');
-            var id = idParam || document.getElementById('idInput').value;
-
+        }
+        function mostrarCampos(id) {
+            
             cargarDatosCSV(function (datos) {
                 var encontrado = false;
 
@@ -68,6 +69,14 @@
                     document.getElementById('camposContainer').innerHTML = 'Non se encontrou o ID especificado';
                 }
             });
+        }
+         window.onload = function () {
+            var urlParams = new URLSearchParams(window.location.search);
+            var idParam = urlParams.get('id');
+
+            if (idParam) {
+                mostrarCampos(idParam);
+            }
         }
     </script>
 </body>
