@@ -40,7 +40,9 @@
         }
 
         function mostrarCampos() {
-            var id = document.getElementById('idInput').value;
+            var urlParams = new URLSearchParams(window.location.search);
+            var idParam = urlParams.get('id');
+            var id = idParam || document.getElementById('idInput').value;
 
             cargarDatosCSV(function (datos) {
                 var encontrado = false;
