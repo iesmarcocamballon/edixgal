@@ -69,14 +69,14 @@
                 }
 
                 if (!encontrado) {
-                    document.getElementById('camposContainer').innerHTML = 'Non se encontrou o ID especificado';
+                    document.getElementById('camposContainer').innerHTML = 'Non se encontrou o ID'+ id;
                 }
             });
         }
+        
          window.onload = function () {
             var urlParams = new URLSearchParams(window.location.search);
             var idParam = urlParams.get('id');
-
             if (idParam) {
                 mostrarCampos(idParam);
             }
