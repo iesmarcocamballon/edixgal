@@ -43,7 +43,9 @@
         }
         function botonPulsado(){
             var id = document.getElementById('idInput').value;
-            mostrarCampos(id);
+            if (id) {
+                mostrarCampos(id);
+            }
 
         }
         function mostrarCampos(id) {
@@ -52,7 +54,7 @@
                 var encontrado = false;
 
                 for (var i = 0; i < datos.length; i++) {
-                    if (datos[i].id === id) {
+                    if ( datos[i].id === id) {
                         encontrado = true;
                         var nombre = datos[i].nome;
                         var curso = datos[i].curso;
@@ -69,7 +71,7 @@
                 }
 
                 if (!encontrado) {
-                    document.getElementById('camposContainer').innerHTML = 'Non se encontrou o ID'+ id;
+                    document.getElementById('camposContainer').innerHTML = 'Non se encontrou o ID '+ id;
                 }
             });
         }
